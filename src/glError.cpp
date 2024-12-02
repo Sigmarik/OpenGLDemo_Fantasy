@@ -12,14 +12,12 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
-void glCheckError(const char* file, unsigned int line) {
+void _glCheckError(const char* file, unsigned int line) {
   GLenum errorCode = glGetError();
 
   while (errorCode != GL_NO_ERROR) {
-    string fileString(file);
-    string error = "unknown error";
+    std::string fileString(file);
+    std::string error = "unknown error";
 
     // clang-format off
     switch (errorCode) {
@@ -32,8 +30,8 @@ void glCheckError(const char* file, unsigned int line) {
     }
     // clang-format on
 
-    cerr << "OpenglError : file=" << file << " line=" << line
-         << " error:" << error << endl;
+    std::cerr << "OpenglError : file=" << file << " line=" << line
+              << " error:" << error << std::endl;
     errorCode = glGetError();
   }
 }

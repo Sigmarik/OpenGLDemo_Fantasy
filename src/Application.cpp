@@ -13,8 +13,6 @@
 #include <iostream>
 #include <stdexcept>
 
-using namespace std;
-
 Application* currentApplication = NULL;
 
 Application& Application::getInstance() {
@@ -28,7 +26,7 @@ Application::Application()
     : state(stateReady), width(640), height(480), title("Application") {
   currentApplication = this;
 
-  cout << "[Info] GLFW initialisation" << endl;
+  std::cout << "[Info] GLFW initialisation" << std::endl;
 
   // initialize the GLFW library
   if (!glfwInit()) {
@@ -57,15 +55,15 @@ Application::Application()
 
   if (err != GLEW_OK) {
     glfwTerminate();
-    throw std::runtime_error(string("Could initialize GLEW, error = ") +
+    throw std::runtime_error(std::string("Could initialize GLEW, error = ") +
                              (const char*)glewGetErrorString(err));
   }
 
   // get version info
   const GLubyte* renderer = glGetString(GL_RENDERER);
   const GLubyte* version = glGetString(GL_VERSION);
-  cout << "Renderer: " << renderer << endl;
-  cout << "OpenGL version supported " << version << endl;
+  std::cout << "Renderer: " << renderer << std::endl;
+  std::cout << "OpenGL version supported " << version << std::endl;
 
   // opengl configuration
   glEnable(GL_DEPTH_TEST);  // enable depth-testing
@@ -105,7 +103,7 @@ void Application::run() {
     deltaTime = t - time;
     time = t;
 
-    // detech window related changes
+    // detect window related changes
     detectWindowDimensionChange();
 
     // execute the frame code
@@ -133,7 +131,7 @@ void Application::detectWindowDimensionChange() {
 }
 
 void Application::loop() {
-  cout << "[INFO] : loop" << endl;
+  std::cout << "[INFO] : loop" << std::endl;
 }
 
 int Application::getWidth() {

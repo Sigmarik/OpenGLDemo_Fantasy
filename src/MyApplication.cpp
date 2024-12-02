@@ -49,7 +49,7 @@ MyApplication::MyApplication()
       vertexShader(SHADER_DIR "/shader.vert", GL_VERTEX_SHADER),
       fragmentShader(SHADER_DIR "/shader.frag", GL_FRAGMENT_SHADER),
       shaderProgram({vertexShader, fragmentShader}) {
-  glCheckError(__FILE__, __LINE__);
+  glCheckError();
 
   // creation of the mesh ------------------------------------------------------
   std::vector<VertexType> vertices;
@@ -137,14 +137,14 @@ void MyApplication::loop() {
   shaderProgram.setUniform("projection", projection);
   shaderProgram.setUniform("view", view);
 
-  glCheckError(__FILE__, __LINE__);
+  glCheckError();
 
   glBindVertexArray(vao);
 
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
-  glCheckError(__FILE__, __LINE__);
+  glCheckError();
   glDrawElements(GL_TRIANGLES,         // mode
                  size * size * 2 * 3,  // count
                  GL_UNSIGNED_INT,      // type
